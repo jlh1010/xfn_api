@@ -1,0 +1,75 @@
+<!--  文件 -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="bt1">获取所有的菜品类别</button>
+  <br>
+  <button id="bt2">删除菜品类别</button>
+  <br>
+  <button id="bt3">添加菜品类别</button>
+  <br>
+  <button id="bt4">修改菜品类别</button>
+  <script src="./axios.min.js"></script>
+  <script>
+    bt1.onclick = function () {
+      axios.get("http://127.0.0.1:8090/admin/category")
+        .then((result => {
+          console.log("获取菜品类别成功：");
+          console.log(result.data);
+        }))
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+
+    // PUT /DELETE 请求之前浏览器会先提交一个
+    // “预取请求”——Preflight Request——OPTIONS
+    bt2.onclick = function () {
+      axios.delete("http://127.0.0.1:8090/admin/category/1")
+        .then((result => {
+          console.log("删除菜品类别成功：");
+          console.log(result.data);
+        }))
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+    bt3.onclick = function () {
+      var data = {
+        cname: "甜品类"
+      };
+      axios.post("http://127.0.0.1:8090/admin/category", data)
+        .then((result) => {
+          console.log("新建菜品类别成功：");
+          console.log(result.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+    bt4.onclick = function () {
+      var data = {
+        cid: 13,
+        cname: '饮品类'
+      }
+      axios.put("http://127.0.0.1:8090/admin/category", data)
+        .then((result) => {
+          console.log("菜品类别修改成功：");
+          console.log(result.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  </script>
+</body>
+
+</html>
